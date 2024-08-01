@@ -1,0 +1,26 @@
+service: cognito-example
+
+useDotenv: true
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  environment:
+    AUTHSIGNAL_SECRET: ${env:AUTHSIGNAL_SECRET}
+    AUTHSIGNAL_URL: ${env:AUTHSIGNAL_URL}
+
+package:
+  individually: true
+
+functions:
+  defineAuthChallenge:
+    handler: lambdas/define-auth-challenge.handler
+
+  createAuthChallenge:
+    handler: lambdas/create-auth-challenge.handler
+
+  verifyAuthChallengeResponse:
+    handler: lambdas/verify-auth-challenge-response.handler
+
+  preSignUp:
+    handler: lambdas/pre-sign-up.handler
