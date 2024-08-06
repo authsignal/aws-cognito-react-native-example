@@ -4,8 +4,8 @@ provider:
   name: aws
   runtime: nodejs18.x
   environment:
-    AUTHSIGNAL_SECRET: hg372duzX8fDDdP5a5ArlHTZW49DiBJ3TzbmHvP+1xg/mMKrwhUNGQ==
-    AUTHSIGNAL_URL: https://dev-api.authsignal.com/v1
+    AUTHSIGNAL_SECRET: YOUR_SECRET_KEY
+    AUTHSIGNAL_URL: YOUR_REGION_URL
 
 package:
   individually: true
