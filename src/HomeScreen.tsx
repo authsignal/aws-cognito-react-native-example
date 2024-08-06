@@ -1,28 +1,31 @@
-import {getCurrentUser, AuthUser, signOut} from 'aws-amplify/auth';
-import React, {useEffect, useState} from 'react';
+import {signOut} from 'aws-amplify/auth';
+import React, {useEffect} from 'react';
 import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
 
 import {Button} from './Button';
+import {useAuthContext} from './context';
+import {authsignal} from './config';
 
-export function HomeScreen({navigation}: any) {
-  const [user, setUser] = useState<AuthUser | undefined>();
+export function HomeScreen() {
+  const {authsignalToken, setIsSignedIn, setAuthsignalToken} = useAuthContext();
 
   useEffect(() => {
-    getCurrentUser().then(setUser);
-  }, []);
+    if (authsignalToken) {
+      authsignal.passkey.signUp({token: authsignalToken});
+
+      setAuthsignalToken(null);
+    }
+  }, [authsignalToken, setAuthsignalToken]);
 
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.header}>Signed in</Text>
-      {user && (
-        <Text style={styles.text}>{`Cognito user ID:\n\n ${user.userId}`}</Text>
-      )}
       <View style={styles.buttonContainer}>
         <Button
           onPress={async () => {
             await signOut();
 
-            navigation.navigate('Login');
+            setIsSignedIn(false);
           }}>
           Sign out
         </Button>
@@ -43,11 +46,6 @@ const styles = StyleSheet.create({
     color: 'black',
     fontSize: 32,
     fontWeight: 'bold',
-  },
-  text: {
-    marginVertical: 20,
-    color: 'black',
-    fontSize: 12,
   },
   buttonContainer: {
     width: '100%',

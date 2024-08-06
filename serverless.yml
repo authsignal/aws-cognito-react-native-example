@@ -1,13 +1,11 @@
 service: cognito-example
 
-useDotenv: true
-
 provider:
   name: aws
   runtime: nodejs18.x
   environment:
-    AUTHSIGNAL_SECRET: ${env:AUTHSIGNAL_SECRET}
-    AUTHSIGNAL_URL: ${env:AUTHSIGNAL_URL}
+    AUTHSIGNAL_SECRET: hg372duzX8fDDdP5a5ArlHTZW49DiBJ3TzbmHvP+1xg/mMKrwhUNGQ==
+    AUTHSIGNAL_URL: https://dev-api.authsignal.com/v1
 
 package:
   individually: true
