@@ -6,14 +6,7 @@ import {
   SignUpInput,
 } from 'aws-amplify/auth';
 import React, {useState} from 'react';
-import {
-  Alert,
-  Keyboard,
-  SafeAreaView,
-  StyleSheet,
-  TextInput,
-  TouchableWithoutFeedback,
-} from 'react-native';
+import {Alert, SafeAreaView, StyleSheet, TextInput} from 'react-native';
 import {launch} from 'react-native-authsignal';
 
 import {Button} from './Button';
@@ -25,78 +18,74 @@ export function CreateAccountScreen() {
   const [email, setEmail] = useState('');
 
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-      <SafeAreaView style={styles.container}>
-        <TextInput
-          style={styles.input}
-          placeholder="email"
-          onChangeText={setEmail}
-          value={email}
-          autoCapitalize={'none'}
-          autoCorrect={false}
-          autoFocus={false}
-          textContentType={'username'}
-        />
-        <Button
-          onPress={async () => {
-            try {
-              const signUpInput: SignUpInput = {
-                username: email,
-                password: Math.random().toString(36).slice(-16) + 'X', // Dummy value - never used
-                options: {
-                  userAttributes: {
-                    email,
-                  },
-                },
-              };
-
-              await signUp(signUpInput);
-            } catch (ex) {
-              if (ex instanceof Error) {
-                return Alert.alert('Error creating account', ex.message);
-              } else {
-                return;
-              }
-            }
-
-            const signInInput: SignInInput = {
+    <SafeAreaView style={styles.container}>
+      <TextInput
+        style={styles.input}
+        placeholder="email"
+        onChangeText={setEmail}
+        value={email}
+        autoCapitalize={'none'}
+        autoCorrect={false}
+        autoFocus={true}
+        textContentType={'emailAddress'}
+      />
+      <Button
+        onPress={async () => {
+          try {
+            const signUpInput: SignUpInput = {
               username: email,
+              password: Math.random().toString(36).slice(-16) + 'X', // Dummy value - never used
               options: {
-                authFlowType: 'CUSTOM_WITHOUT_SRP',
+                userAttributes: {
+                  email,
+                },
               },
             };
 
-            const {nextStep} = await signIn(signInInput);
-
-            if (
-              nextStep.signInStep !== 'CONFIRM_SIGN_IN_WITH_CUSTOM_CHALLENGE'
-            ) {
+            await signUp(signUpInput);
+          } catch (ex) {
+            if (ex instanceof Error) {
+              return Alert.alert('Error creating account', ex.message);
+            } else {
               return;
             }
+          }
 
-            const url = nextStep.additionalInfo!.url;
+          const signInInput: SignInInput = {
+            username: email,
+            options: {
+              authFlowType: 'CUSTOM_WITHOUT_SRP',
+            },
+          };
 
-            const token = await launch(url);
+          const {nextStep} = await signIn(signInInput);
 
-            if (!token) {
-              return Alert.alert('Account already exists');
-            }
+          if (nextStep.signInStep !== 'CONFIRM_SIGN_IN_WITH_CUSTOM_CHALLENGE') {
+            return;
+          }
 
-            const {isSignedIn} = await confirmSignIn({
-              challengeResponse: token,
-            });
+          const url = nextStep.additionalInfo!.url;
 
-            if (!isSignedIn) {
-              return;
-            }
+          const token = await launch(url);
 
-            setIsSignedIn(true);
-            setAuthsignalToken(token);
-          }}>
-          Create account
-        </Button>
-      </SafeAreaView>
-    </TouchableWithoutFeedback>
+          if (!token) {
+            return;
+          }
+
+          const {isSignedIn} = await confirmSignIn({
+            challengeResponse: token,
+          });
+
+          if (!isSignedIn) {
+            return;
+          }
+
+          setIsSignedIn(true);
+          setAuthsignalToken(token);
+        }}>
+        Create account
+      </Button>
+    </SafeAreaView>
   );
 }
 
