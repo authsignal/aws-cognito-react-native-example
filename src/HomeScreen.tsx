@@ -3,18 +3,23 @@ import React, {useEffect} from 'react';
 import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
 
 import {Button} from './Button';
-import {useAuthContext} from './context';
 import {authsignal} from './config';
+import {useAuthContext} from './context';
 
 export function HomeScreen() {
   const {authsignalToken, setIsSignedIn, setAuthsignalToken} = useAuthContext();
 
   useEffect(() => {
-    if (authsignalToken) {
-      authsignal.passkey.signUp({token: authsignalToken});
+    (async () => {
+      // True if a passkey has been created on this device with the SDK
+      const isPasskeyAvailable = await authsignal.passkey.isAvailableOnDevice();
 
-      setAuthsignalToken(null);
-    }
+      if (!isPasskeyAvailable && authsignalToken) {
+        authsignal.passkey.signUp({token: authsignalToken});
+
+        setAuthsignalToken(null);
+      }
+    })();
   }, [authsignalToken, setAuthsignalToken]);
 
   return (

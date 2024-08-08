@@ -1,11 +1,11 @@
 import {confirmSignIn, signIn} from 'aws-amplify/auth';
 import React from 'react';
 import {Image, SafeAreaView, StyleSheet, View} from 'react-native';
+import {ErrorCode} from 'react-native-authsignal';
 
 import {Button} from './Button';
 import {authsignal} from './config';
 import {useAuthContext} from './context';
-import {ErrorCode} from 'react-native-authsignal';
 
 export function SignInScreen({navigation}: any) {
   const {setIsSignedIn} = useAuthContext();
