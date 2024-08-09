@@ -21,18 +21,17 @@ export const handler: CreateAuthChallengeTriggerHandler = async event => {
     verificationMethod: VerificationMethod.PASSKEY,
   });
 
-  // Should match your URL Scheme if using the React Native SDK to launch the pre-built UI
-  const redirectUrl = 'authsignal://auth';
-
-  const {url, token} = await authsignal.track({
+  const {token, isEnrolled} = await authsignal.track({
     action: 'cognitoAuth',
     userId,
     email,
     challengeId,
-    redirectUrl,
   });
 
-  event.response.publicChallengeParameters = {url, token};
+  event.response.publicChallengeParameters = {
+    token,
+    isEnrolled: isEnrolled ? 'true' : 'false',
+  };
 
   return event;
 };

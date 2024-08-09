@@ -1,11 +1,11 @@
 import {Authsignal} from 'react-native-authsignal';
 
-const authsignalArgs = {
-  tenantID: '',
-  baseURL: 'https://api.authsignal.com/v1', // Change for your region if required
-};
+export const tenantID = '';
 
-export const authsignal = new Authsignal(authsignalArgs);
+// Change for your region if required
+export const baseURL = 'https://api.authsignal.com/v1';
+
+export const authsignal = new Authsignal({tenantID, baseURL});
 
 export const userPoolId = '';
 export const userPoolClientId = '';

@@ -4,10 +4,11 @@ import {Amplify} from 'aws-amplify';
 import {getCurrentUser} from 'aws-amplify/auth';
 import React, {useEffect, useMemo, useState} from 'react';
 
-import {SignInEmailScreen} from './SignInEmailScreen';
 import {CreateAccountScreen} from './CreateAccountScreen';
 import {HomeScreen} from './HomeScreen';
 import {SignInScreen} from './SignInScreen';
+import {SignInEmailScreen} from './SignInEmailScreen';
+import {VerifyEmailScreen} from './VerifyEmailScreen';
 import {userPoolClientId, userPoolId} from './config';
 import {AuthContext} from './context';
 
@@ -67,20 +68,14 @@ function App() {
                   presentation: 'modal',
                 }}>
                 <Stack.Screen
-                  name="CreateAccount"
-                  component={CreateAccountScreen}
-                  options={{
-                    title: 'Create account',
-                    headerBackTitleVisible: false,
-                  }}
+                  name="CreateAccountStack"
+                  component={CreateAccountStack}
+                  options={{headerShown: false}}
                 />
                 <Stack.Screen
-                  name="SignInEmail"
-                  component={SignInEmailScreen}
-                  options={{
-                    title: 'Sign in with email',
-                    headerBackTitleVisible: false,
-                  }}
+                  name="SignInEmailStack"
+                  component={SignInEmailStack}
+                  options={{headerShown: false}}
                 />
               </Stack.Group>
             </>
@@ -92,3 +87,45 @@ function App() {
 }
 
 export default App;
+
+function SignInEmailStack() {
+  return (
+    <Stack.Navigator screenOptions={{headerBackTitleVisible: false}}>
+      <Stack.Screen
+        name="SignInEmail"
+        component={SignInEmailScreen}
+        options={{
+          title: 'Sign in with email',
+        }}
+      />
+      <Stack.Screen
+        name="VerifyEmail"
+        component={VerifyEmailScreen}
+        options={{
+          title: 'Verify email',
+        }}
+      />
+    </Stack.Navigator>
+  );
+}
+
+function CreateAccountStack() {
+  return (
+    <Stack.Navigator screenOptions={{headerBackTitleVisible: false}}>
+      <Stack.Screen
+        name="CreateAccount"
+        component={CreateAccountScreen}
+        options={{
+          title: 'Create account',
+        }}
+      />
+      <Stack.Screen
+        name="VerifyEmail"
+        component={VerifyEmailScreen}
+        options={{
+          title: 'Verify email',
+        }}
+      />
+    </Stack.Navigator>
+  );
+}
