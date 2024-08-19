@@ -31,9 +31,9 @@ export function SignInScreen({navigation}: any) {
               return navigation.navigate('SignInEmail');
             }
 
-            if (data?.userName && data?.token) {
+            if (data?.username && data?.token) {
               await signIn({
-                username: data.userName,
+                username: data.username,
                 options: {
                   authFlowType: 'CUSTOM_WITHOUT_SRP',
                 },

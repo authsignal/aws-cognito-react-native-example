@@ -102,7 +102,7 @@ Pass the username and token returned by the Authsignal SDK.
 
 ```ts
 await signIn({
-  username: data.userName,
+  username: data.username,
   options: {
     authFlowType: 'CUSTOM_WITHOUT_SRP',
   },

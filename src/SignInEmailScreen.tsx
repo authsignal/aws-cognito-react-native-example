@@ -1,13 +1,13 @@
 import {confirmSignIn, signIn, SignInInput} from 'aws-amplify/auth';
 import React, {useState} from 'react';
 import {Alert, SafeAreaView, StyleSheet, TextInput} from 'react-native';
-import {launch} from 'react-native-authsignal';
 
 import {Button} from './Button';
 import {useAuthContext} from './context';
+import {authsignal} from './config';
 
 export function SignInEmailScreen() {
-  const {setIsSignedIn, setAuthsignalToken} = useAuthContext();
+  const {setIsSignedIn} = useAuthContext();
 
   const [email, setEmail] = useState('');
 
@@ -43,7 +43,7 @@ export function SignInEmailScreen() {
 
             const url = nextStep.additionalInfo!.url;
 
-            const token = await launch(url);
+            const token = await authsignal.launch(url);
 
             const {isSignedIn} = await confirmSignIn({
               challengeResponse: token!,
@@ -54,7 +54,6 @@ export function SignInEmailScreen() {
             }
 
             setIsSignedIn(true);
-            setAuthsignalToken(token);
           } catch {
             Alert.alert('Invalid credentials');
           }

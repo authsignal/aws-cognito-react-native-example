@@ -13,7 +13,7 @@ import {Button} from './Button';
 import {useAuthContext} from './context';
 
 export function CreateAccountScreen() {
-  const {setIsSignedIn, setAuthsignalToken} = useAuthContext();
+  const {setIsSignedIn} = useAuthContext();
 
   const [email, setEmail] = useState('');
 
@@ -81,7 +81,6 @@ export function CreateAccountScreen() {
           }
 
           setIsSignedIn(true);
-          setAuthsignalToken(token);
         }}>
         Create account
       </Button>

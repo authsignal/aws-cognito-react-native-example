@@ -7,20 +7,18 @@ import {authsignal} from './config';
 import {useAuthContext} from './context';
 
 export function HomeScreen() {
-  const {authsignalToken, setIsSignedIn, setAuthsignalToken} = useAuthContext();
+  const {setIsSignedIn} = useAuthContext();
 
   useEffect(() => {
     (async () => {
       // True if a passkey has been created on this device with the SDK
       const isPasskeyAvailable = await authsignal.passkey.isAvailableOnDevice();
 
-      if (!isPasskeyAvailable && authsignalToken) {
-        authsignal.passkey.signUp({token: authsignalToken});
-
-        setAuthsignalToken(null);
+      if (!isPasskeyAvailable) {
+        authsignal.passkey.signUp();
       }
     })();
-  }, [authsignalToken, setAuthsignalToken]);
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>
