@@ -11,7 +11,7 @@ export function HomeScreen() {
 
   useEffect(() => {
     (async () => {
-      // True if a passkey has been created on this device with the SDK
+      // True if a passkey has been previously created on this device with the SDK
       const isPasskeyAvailable = await authsignal.passkey.isAvailableOnDevice();
 
       if (!isPasskeyAvailable) {

@@ -49,11 +49,7 @@ export function SignInEmailScreen() {
               challengeResponse: token!,
             });
 
-            if (!isSignedIn) {
-              return;
-            }
-
-            setIsSignedIn(true);
+            setIsSignedIn(isSignedIn);
           } catch {
             Alert.alert('Invalid credentials');
           }
