@@ -1,14 +1,11 @@
-import {confirmSignIn, signIn, SignInInput} from 'aws-amplify/auth';
+import {signIn, SignInInput} from 'aws-amplify/auth';
 import React, {useState} from 'react';
 import {Alert, SafeAreaView, StyleSheet, TextInput} from 'react-native';
 
 import {Button} from './Button';
-import {useAuthContext} from './context';
 import {authsignal} from './config';
 
-export function SignInEmailScreen() {
-  const {setIsSignedIn} = useAuthContext();
-
+export function SignInEmailScreen({navigation}: any) {
   const [email, setEmail] = useState('');
 
   return (
@@ -41,15 +38,12 @@ export function SignInEmailScreen() {
               return;
             }
 
-            const url = nextStep.additionalInfo!.url;
+            const token = nextStep.additionalInfo!.token;
+            const isEnrolled = nextStep.additionalInfo!.isEnrolled === 'true';
 
-            const token = await authsignal.launch(url);
+            await authsignal.setToken(token);
 
-            const {isSignedIn} = await confirmSignIn({
-              challengeResponse: token!,
-            });
-
-            setIsSignedIn(isSignedIn);
+            navigation.navigate('VerifyEmail', {email, isEnrolled});
           } catch {
             Alert.alert('Invalid credentials');
           }

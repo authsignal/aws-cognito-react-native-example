@@ -28,7 +28,7 @@ export function SignInScreen({navigation}: any) {
               errorCode === ErrorCode.passkeySignInCanceled ||
               errorCode === ErrorCode.noPasskeyCredentialAvailable
             ) {
-              return navigation.navigate('SignInEmail');
+              return navigation.navigate('SignInEmailStack');
             }
 
             if (data?.username && data?.token) {
@@ -50,7 +50,7 @@ export function SignInScreen({navigation}: any) {
         </Button>
         <Button
           theme={'secondary'}
-          onPress={() => navigation.navigate('CreateAccount')}>
+          onPress={() => navigation.navigate('CreateAccountStack')}>
           Create account
         </Button>
       </View>
