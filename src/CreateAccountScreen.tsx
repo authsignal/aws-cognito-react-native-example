@@ -3,6 +3,7 @@ import React, {useState} from 'react';
 import {Alert, SafeAreaView, StyleSheet, TextInput} from 'react-native';
 
 import {Button} from './Button';
+import {authsignal} from './config';
 
 export function CreateAccountScreen({navigation}: any) {
   const [email, setEmail] = useState('');
@@ -54,9 +55,12 @@ export function CreateAccountScreen({navigation}: any) {
             return;
           }
 
-          const {token, isEnrolled} = nextStep.additionalInfo ?? {};
+          const token = nextStep.additionalInfo!.token;
+          const isEnrolled = nextStep.additionalInfo!.isEnrolled === 'true';
 
-          navigation.navigate('VerifyEmail', {token, isEnrolled});
+          await authsignal.setToken(token);
+
+          navigation.navigate('VerifyEmail', {email, isEnrolled});
         }}>
         Create account
       </Button>
