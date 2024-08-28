@@ -1,7 +1,7 @@
 PODS:
   - AmplifyRTNCore (1.1.4):
     - React-Core
-  - Authsignal (1.0.3)
+  - Authsignal (1.0.5)
   - boost (1.76.0)
   - DoubleConversion (1.1.6)
   - FBLazyVector (0.72.1)
@@ -317,8 +317,8 @@ PODS:
   - React-jsinspector (0.72.1)
   - React-logger (0.72.1):
     - glog
-  - react-native-authsignal (1.0.0):
-    - Authsignal (= 1.0.3)
+  - react-native-authsignal (1.0.3):
+    - Authsignal (= 1.0.5)
     - React-Core
   - react-native-get-random-values (1.11.0):
     - React-Core
@@ -607,7 +607,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   AmplifyRTNCore: 43396d8b36c4969edd87d400b1142c52afbb294f
-  Authsignal: 8ba5287dda4dd2feb2700b04e7e98829d0c1d3c8
+  Authsignal: bdef4accd133e7db7eabc1106a5b044f6d017f04
   boost: 57d2868c099736d80fcd648bf211b4431e51a558
   DoubleConversion: 5189b271737e1565bdce30deb4a08d647e3f5f54
   FBLazyVector: 55cd4593d570bd9e5e227488d637ce6a9581ce51
@@ -631,7 +631,7 @@ SPEC CHECKSUMS:
   React-jsiexecutor: 184eae1ecdedc7a083194bd9ff809c93f08fd34c
   React-jsinspector: d0b5bfd1085599265f4212034321e829bdf83cc0
   React-logger: b8103c9b04e707b50cdd2b1aeb382483900cbb37
-  react-native-authsignal: 0eab6c99f80557531781feab6b974c9c62ed36f9
+  react-native-authsignal: 95a0ab849c364674b8aee3010f1cf2252f8cbc46
   react-native-get-random-values: 21325b2244dfa6b58878f51f9aa42821e7ba3d06
   react-native-netinfo: 076df4f9b07f6670acf4ce9a75aac8d34c2e2ccc
   react-native-safe-area-context: 36cc67648134e89465663b8172336a19eeda493d
