@@ -1,10 +1,10 @@
 import {Authsignal, VerificationMethod} from '@authsignal/node';
 import {CreateAuthChallengeTriggerHandler} from 'aws-lambda';
 
-const secret = process.env.AUTHSIGNAL_SECRET!;
-const apiBaseUrl = process.env.AUTHSIGNAL_URL!;
+const apiSecretKey = process.env.AUTHSIGNAL_SECRET!;
+const apiUrl = process.env.AUTHSIGNAL_URL!;
 
-const authsignal = new Authsignal({secret, apiBaseUrl});
+const authsignal = new Authsignal({apiSecretKey, apiUrl});
 
 export const handler: CreateAuthChallengeTriggerHandler = async event => {
   const userId = event.request.userAttributes.sub;
@@ -16,8 +16,8 @@ export const handler: CreateAuthChallengeTriggerHandler = async event => {
 
   // Check if a challenge has already been initiated via passkey SDK
   const {challengeId} = await authsignal.getChallenge({
-    action: 'cognitoAuth',
     userId,
+    action: 'cognitoAuth',
     verificationMethod: VerificationMethod.PASSKEY,
   });
 
@@ -25,11 +25,13 @@ export const handler: CreateAuthChallengeTriggerHandler = async event => {
   const redirectUrl = 'authsignal://auth';
 
   const {url, token} = await authsignal.track({
-    action: 'cognitoAuth',
     userId,
-    email,
-    challengeId,
-    redirectUrl,
+    action: 'cognitoAuth',
+    attributes: {
+      email,
+      challengeId,
+      redirectUrl,
+    },
   });
 
   event.response.publicChallengeParameters = {url, token};

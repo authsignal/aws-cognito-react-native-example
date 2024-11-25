@@ -1,10 +1,10 @@
 import {Authsignal} from '@authsignal/node';
 import {VerifyAuthChallengeResponseTriggerHandler} from 'aws-lambda';
 
-const secret = process.env.AUTHSIGNAL_SECRET!;
-const apiBaseUrl = process.env.AUTHSIGNAL_URL!;
+const apiSecretKey = process.env.AUTHSIGNAL_SECRET!;
+const apiUrl = process.env.AUTHSIGNAL_URL!;
 
-const authsignal = new Authsignal({secret, apiBaseUrl});
+const authsignal = new Authsignal({apiSecretKey, apiUrl});
 
 export const handler: VerifyAuthChallengeResponseTriggerHandler =
   async event => {
@@ -12,8 +12,8 @@ export const handler: VerifyAuthChallengeResponseTriggerHandler =
     const token = event.request.challengeAnswer;
 
     const {state} = await authsignal.validateChallenge({
-      action: 'cognitoAuth',
       userId,
+      action: 'cognitoAuth',
       token,
     });
 
