@@ -10,6 +10,7 @@ import {HomeScreen} from './HomeScreen';
 import {SignInScreen} from './SignInScreen';
 import {userPoolClientId, userPoolId} from './config';
 import {AuthContext} from './context';
+import {VerifyEmailScreen} from './VerifyEmailScreen';
 
 Amplify.configure({
   Auth: {
@@ -79,6 +80,14 @@ function App() {
                   component={SignInEmailScreen}
                   options={{
                     title: 'Sign in with email',
+                    headerBackTitleVisible: false,
+                  }}
+                />
+                <Stack.Screen
+                  name="VerifyEmail"
+                  component={VerifyEmailScreen}
+                  options={{
+                    title: 'Verify email',
                     headerBackTitleVisible: false,
                   }}
                 />

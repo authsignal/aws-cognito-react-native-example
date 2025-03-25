@@ -1,6 +1,6 @@
 import {signOut} from 'aws-amplify/auth';
 import React, {useEffect} from 'react';
-import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import {Alert, SafeAreaView, StyleSheet, Text, View} from 'react-native';
 
 import {Button} from './Button';
 import {authsignal} from './config';
@@ -15,7 +15,15 @@ export function HomeScreen() {
       const isPasskeyAvailable = await authsignal.passkey.isAvailableOnDevice();
 
       if (!isPasskeyAvailable) {
-        authsignal.passkey.signUp();
+        try {
+          await authsignal.passkey.signUp();
+
+          Alert.alert('Passkey created.');
+        } catch (ex) {
+          if (ex instanceof Error) {
+            Alert.alert('Error: ', ex.message);
+          }
+        }
       }
     })();
   }, []);

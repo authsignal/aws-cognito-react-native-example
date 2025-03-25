@@ -15,12 +15,14 @@
     "@jridgewell/gen-mapping" "^0.3.0"
     "@jridgewell/trace-mapping" "^0.3.9"
 
-"@authsignal/node@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@authsignal/node/-/node-2.0.0.tgz#1a5a14b42f8dcb2e4d4842f840a318127ff83c98"
-  integrity sha512-naNBmozP9UoBdNWfJpirfdzNZ+y+qeGOp8kLtOEULHTuYE6pDF/Ugo7I4YGyOk4TPwybEX/vPOrF9zpGlCxD/Q==
+"@authsignal/node@^2.3.1":
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/@authsignal/node/-/node-2.3.1.tgz#9d25f52fbd087aea8db9fd36be8c52140dd0f7b8"
+  integrity sha512-+wal4volvexrMwwnLkTa/Zi+JOviBLHCQG+L4QnM/gS757ybhmxz97CWgD5Re3HXbtCSZ+k4Ghh/0N+Mk2Lcog==
   dependencies:
-    axios "^1.7.2"
+    axios "^1.7.9"
+    axios-retry "^4.5.0"
+    crypto "^1.0.1"
 
 "@aws-amplify/analytics@7.0.40":
   version "7.0.40"
@@ -3658,6 +3660,13 @@ axios-proxy-builder@^0.1.2:
   dependencies:
     tunnel "^0.0.6"
 
+axios-retry@^4.5.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/axios-retry/-/axios-retry-4.5.0.tgz#441fdc32cedf63d6abd5de5d53db3667afd4c39b"
+  integrity sha512-aR99oXhpEDGo0UuAlYcn2iGRds30k366Zfa05XWScR9QaQD4JYiP3/1Qt1u7YlefUOK+cn0CcwoL1oefavQUlQ==
+  dependencies:
+    is-retry-allowed "^2.2.0"
+
 axios@^1.6.0:
   version "1.7.3"
   resolved "https://registry.yarnpkg.com/axios/-/axios-1.7.3.tgz#a1125f2faf702bc8e8f2104ec3a76fab40257d85"
@@ -3667,10 +3676,10 @@ axios@^1.6.0:
     form-data "^4.0.0"
     proxy-from-env "^1.1.0"
 
-axios@^1.7.2:
-  version "1.7.2"
-  resolved "https://registry.yarnpkg.com/axios/-/axios-1.7.2.tgz#b625db8a7051fbea61c35a3cbb3a1daa7b9c7621"
-  integrity sha512-2A8QhOMrbomlDuiLeK9XibIBzuHeRcqqNOHp0Cyp5EoJ1IFDh+XZH3A6BkXtv0K4gFGCI0Y4BM7B1wOEi0Rmgw==
+axios@^1.7.9:
+  version "1.8.4"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-1.8.4.tgz#78990bb4bc63d2cae072952d374835950a82f447"
+  integrity sha512-eBSYY4Y68NNlHbHBMdeDmKNtDgXWhQsJcGqzO3iLUM0GraQFSS9cVgPX5I9b3lbdFKyYoAEGAZF1DwhTaljNAw==
   dependencies:
     follow-redirects "^1.15.6"
     form-data "^4.0.0"
@@ -4281,6 +4290,11 @@ cross-spawn@^7.0.0, cross-spawn@^7.0.2, cross-spawn@^7.0.3:
     path-key "^3.1.0"
     shebang-command "^2.0.0"
     which "^2.0.1"
+
+crypto@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/crypto/-/crypto-1.0.1.tgz#2af1b7cad8175d24c8a1b0778255794a21803037"
+  integrity sha512-VxBKmeNcqQdiUQUW2Tzq0t377b54N2bMtXO/qiLa+6eRRmmC4qT3D4OnTGoT/U6O9aklQ/jTwbOtRMTTY8G0Ig==
 
 csstype@^3.0.2:
   version "3.1.2"
@@ -5572,6 +5586,11 @@ is-regex@^1.1.4:
   dependencies:
     call-bind "^1.0.2"
     has-tostringtag "^1.0.0"
+
+is-retry-allowed@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/is-retry-allowed/-/is-retry-allowed-2.2.0.tgz#88f34cbd236e043e71b6932d09b0c65fb7b4d71d"
+  integrity sha512-XVm7LOeLpTW4jV19QSH38vkswxoLud8sQ57YwJVTPWdiaI9I8keEhGFpBlslyVsgdQy4Opg8QOLb8YRgsyZiQg==
 
 is-shared-array-buffer@^1.0.2:
   version "1.0.2"
@@ -7544,10 +7563,10 @@ react-is@^17.0.1:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-17.0.2.tgz#e691d4a8e9c789365655539ab372762b0efb54f0"
   integrity sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==
 
-react-native-authsignal@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/react-native-authsignal/-/react-native-authsignal-1.0.3.tgz#9d9cb791e8e9310afa78083a5042bcf156e6a4d1"
-  integrity sha512-oOk3x86hVDD58UZ/4ZR5BvxHK2INDv7992AJlsdtYZZxcAmCDcWs0LM0g7+EOK+l2Essz6mvge45rHdvjSjWvQ==
+react-native-authsignal@^1.1.7:
+  version "1.1.7"
+  resolved "https://registry.yarnpkg.com/react-native-authsignal/-/react-native-authsignal-1.1.7.tgz#921c62f910e7fcf5f0b0ca5ea8e52c79075ea413"
+  integrity sha512-rb3z9LKw1AIKZVBAFAZydSgthdrxcrp4O1eN89Z6Hiyvus3XqQvuz+dMf29nMiKQtoSDrRqoMSIaJ4wzNDPphQ==
 
 react-native-gesture-handler@^2.12.0:
   version "2.12.0"

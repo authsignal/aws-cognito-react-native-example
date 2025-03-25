@@ -1,20 +1,11 @@
-import {
-  confirmSignIn,
-  signIn,
-  SignInInput,
-  signUp,
-  SignUpInput,
-} from 'aws-amplify/auth';
+import {signIn, SignInInput, signUp, SignUpInput} from 'aws-amplify/auth';
 import React, {useState} from 'react';
 import {Alert, SafeAreaView, StyleSheet, TextInput} from 'react-native';
-import {launch} from 'react-native-authsignal';
 
 import {Button} from './Button';
-import {useAuthContext} from './context';
+import {authsignal} from './config';
 
-export function CreateAccountScreen() {
-  const {setIsSignedIn} = useAuthContext();
-
+export function CreateAccountScreen({navigation}: any) {
   const [email, setEmail] = useState('');
 
   return (
@@ -64,23 +55,12 @@ export function CreateAccountScreen() {
             return;
           }
 
-          const url = nextStep.additionalInfo!.url;
+          const token = nextStep.additionalInfo!.token;
+          const isEnrolled = nextStep.additionalInfo!.isEnrolled === 'true';
 
-          const token = await launch(url);
+          await authsignal.setToken(token);
 
-          if (!token) {
-            return;
-          }
-
-          const {isSignedIn} = await confirmSignIn({
-            challengeResponse: token,
-          });
-
-          if (!isSignedIn) {
-            return;
-          }
-
-          setIsSignedIn(true);
+          navigation.navigate('VerifyEmail', {email, isEnrolled});
         }}>
         Create account
       </Button>
