@@ -21,7 +21,7 @@ export const handler: CreateAuthChallengeTriggerHandler = async event => {
     verificationMethod: VerificationMethod.PASSKEY,
   });
 
-  const {token} = await authsignal.track({
+  const {token, isEnrolled} = await authsignal.track({
     userId,
     action: 'cognitoAuth',
     attributes: {
@@ -30,7 +30,7 @@ export const handler: CreateAuthChallengeTriggerHandler = async event => {
     },
   });
 
-  event.response.publicChallengeParameters = {token};
+  event.response.publicChallengeParameters = {token, isEnrolled};
 
   return event;
 };
