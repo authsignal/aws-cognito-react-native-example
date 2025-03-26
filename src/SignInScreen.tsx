@@ -25,8 +25,8 @@ export function SignInScreen({navigation}: any) {
             });
 
             if (
-              errorCode === ErrorCode.passkeySignInCanceled ||
-              errorCode === ErrorCode.noPasskeyCredentialAvailable
+              errorCode === ErrorCode.user_canceled ||
+              errorCode === ErrorCode.no_credential
             ) {
               return navigation.navigate('SignInEmail');
             }
